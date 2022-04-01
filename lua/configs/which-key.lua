@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  local default_setup = {
+  local setup = {
     plugins = {
       marks = true,
       registers = true,
@@ -67,80 +67,75 @@ function M.config()
   }
 
   local mappings = {
-    ["d"] = { "Dashboard" },
-    ["e"] = { "Explorer" },
-    ["w"] = { "Save" },
-    ["q"] = { "Quit" },
-    ["c"] = { "Close Buffer" },
-    ["h"] = { "No Highlight" },
-    ["/"] = { "Comment" },
+    ["d"] = { "<cmd>Dashboard<cr>", "Dashboard" },
+    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    ["w"] = { "<cmd>w<CR>", "Save" },
+    ["q"] = { "<cmd>q<CR>", "Quit" },
+    ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+    ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+    ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment" },
 
     p = {
       name = "Packer",
-      c = { "Compile" },
-      i = { "Install" },
-      s = { "Sync" },
-      S = { "Status" },
-      u = { "Update" },
+      c = { "<cmd>PackerCompile<cr>", "Compile" },
+      i = { "<cmd>PackerInstall<cr>", "Install" },
+      s = { "<cmd>PackerSync<cr>", "Sync" },
+      S = { "<cmd>PackerStatus<cr>", "Status" },
+      u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
 
     g = {
       name = "Git",
-      g = { "Lazygit" },
-      j = { "Next Hunk" },
-      k = { "Prev Hunk" },
-      l = { "Blame" },
-      p = { "Preview Hunk" },
-      h = { "Reset Hunk" },
-      r = { "Reset Buffer" },
-      s = { "Stage Hunk" },
-      u = { "Undo Stage Hunk" },
-      t = { "Open changed file" },
-      b = { "Checkout branch" },
-      c = { "Checkout commit" },
-      d = { "Diff" },
+      g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+      j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+      p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+      h = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+      r = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+      s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+      u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+      o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+      b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
     },
 
     l = {
       name = "LSP",
-      a = { "Code Action" },
-      d = { "Hover Diagnostic" },
-      D = { "All Diagnostics" },
-      f = { "Format" },
-      i = { "Info" },
-      I = { "Installer Info" },
-      r = { "Rename" },
-      R = { "References" },
-      s = { "Document Symbols" },
-      S = { "Symbols Outline" },
+      a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+      f = { "<cmd>lua vim.lsp.buf.formatting_sync()<cr>", "Format" },
+      i = { "<cmd>LspInfo<cr>", "Info" },
+      I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+      r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+      s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     },
 
     s = {
       name = "Search",
-      b = { "Checkout branch" },
-      h = { "Find Help" },
-      m = { "Man Pages" },
-      n = { "Notifications" },
-      r = { "Registers" },
-      k = { "Keymaps" },
-      c = { "Commands" },
+      b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+      m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+      r = { "<cmd>Telescope registers<cr>", "Registers" },
+      k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+      c = { "<cmd>Telescope commands<cr>", "Commands" },
     },
 
     t = {
       name = "Terminal",
-      n = { "Node" },
-      u = { "NCDU" },
-      t = { "Htop" },
-      p = { "Python" },
-      l = { "LazyGit" },
-      f = { "Float" },
-      h = { "Horizontal" },
-      v = { "Vertical" },
+      n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+      u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+      t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+      p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+      l = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "LazyGit" },
+      f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+      h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+      v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     },
   }
 
-  which_key.setup(require("core.utils").user_plugin_opts("plugins.which-key", default_setup))
-  which_key.register(require("core.utils").user_plugin_opts("which-key.register_n_leader", mappings), opts)
+  which_key.setup(setup)
+  which_key.register(mappings, opts)
 end
 
 return M

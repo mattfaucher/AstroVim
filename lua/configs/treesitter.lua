@@ -1,5 +1,7 @@
 local M = {}
 
+local config = require("core.utils").user_settings()
+
 function M.config()
   local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
@@ -25,7 +27,7 @@ function M.config()
       enable = true,
     },
     indent = {
-      enable = false,
+      enable = true,
     },
     rainbow = {
       enable = true,
@@ -38,7 +40,7 @@ function M.config()
     },
   }
 
-  treesitter.setup(require("core.utils").user_plugin_opts("plugins.treesitter", default_opts))
+  treesitter.setup(vim.tbl_deep_extend("force", {}, default_opts, config.overrides.treesitter))
 end
 
 return M

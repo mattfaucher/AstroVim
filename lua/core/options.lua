@@ -1,11 +1,6 @@
 local M = {}
 
-local utils = require "core.utils"
-local colorscheme = utils.user_plugin_opts "colorscheme"
-
 local set = vim.opt
-
-vim.cmd(string.format("colorscheme %s", colorscheme))
 
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
@@ -32,7 +27,6 @@ set.undofile = true -- Enable persistent undo
 set.writebackup = false -- Disable making a backup before overwriting a file
 set.cursorline = true -- Highlight the text line of the cursor
 set.number = true -- Show numberline
-set.relativenumber = true -- Show relative numberline
 set.wrap = false -- Disable wrapping of lines longer than the width of window
 set.conceallevel = 0 -- Show text normally
 set.cmdheight = 1 -- Number of screen lines to use for the command line
@@ -44,6 +38,5 @@ set.pumheight = 10 -- Height of the pop up menu
 set.history = 100 -- Number of commands to remember in a history table
 set.timeoutlen = 300 -- Length of time to wait for a mapped sequence
 set.updatetime = 300 -- Length of time to wait before triggering the plugin
-set.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 
 return M

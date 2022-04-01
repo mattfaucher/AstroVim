@@ -7,34 +7,14 @@ function M.config()
   end
 
   local actions = require "telescope.actions"
+  telescope.load_extension "fzf"
 
-  local notify_present, _ = pcall(require, "notify")
-  if notify_present then
-    telescope.load_extension "notify"
-  end
-
-  telescope.setup(require("core.utils").user_plugin_opts("plugins.telescope", {
+  telescope.setup {
     defaults = {
 
       prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
-      selection_strategy = "reset",
-      sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        horizontal = {
-          prompt_position = "top",
-          preview_width = 0.55,
-          results_width = 0.8,
-        },
-        vertical = {
-          mirror = false,
-        },
-        width = 0.87,
-        height = 0.80,
-        preview_cutoff = 120,
-      },
 
       mappings = {
         i = {
@@ -99,8 +79,15 @@ function M.config()
       },
     },
     pickers = {},
-    extensions = {},
-  }))
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case",
+      },
+    },
+  }
 end
 
 return M

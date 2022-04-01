@@ -1,6 +1,8 @@
 local M = {}
 
 function M.setup()
+  local default = require("core.utils").user_settings()
+
   local signs = {
     { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
@@ -13,7 +15,7 @@ function M.setup()
   end
 
   local config = {
-    virtual_text = true,
+    virtual_text = default.virtual_text,
     signs = {
       active = signs,
     },
@@ -30,7 +32,7 @@ function M.setup()
     },
   }
 
-  vim.diagnostic.config(require("core.utils").user_plugin_opts("diagnostics", config))
+  vim.diagnostic.config(config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -56,23 +58,30 @@ local function lsp_highlight_document(client)
   end
 end
 
+local function lsp_keymaps(bufnr)
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "go", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>p", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+end
+
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
-  elseif client.name == "jsonls" then
-    client.resolved_capabilities.document_formatting = false
-  elseif client.name == "html" then
-    client.resolved_capabilities.document_formatting = false
-  elseif client.name == "sumneko_lua" then
+  end
+  if client.name == "jsonls" then
     client.resolved_capabilities.document_formatting = false
   end
-
-  local on_attach_override = require("core.utils").user_plugin_opts "lsp.on_attach"
-  if on_attach_override ~= nil then
-    on_attach_override(client, bufnr)
+  if client.name == "html" then
+    client.resolved_capabilities.document_formatting = false
   end
-
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
 

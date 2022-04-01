@@ -11,6 +11,11 @@ function M.config()
     return
   end
 
+  local check_backspace = function()
+    local col = vim.fn.col "." - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+  end
+
   local kind_icons = {
     Text = "",
     Method = "",
@@ -39,8 +44,7 @@ function M.config()
     TypeParameter = "",
   }
 
-  cmp.setup(require("core.utils").user_plugin_opts("plugins.cmp", {
-    preselect = cmp.PreselectMode.None,
+  cmp.setup {
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(_, vim_item)
@@ -99,6 +103,8 @@ function M.config()
           luasnip.expand()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
+        elseif check_backspace() then
+          fallback()
         else
           fallback()
         end
@@ -119,7 +125,7 @@ function M.config()
         "s",
       }),
     },
-  }))
+  }
 end
 
 return M

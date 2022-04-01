@@ -1,26 +1,5 @@
 local others = {
 
-  -- Bufferline
-  BufferLineFill = { fg = C.grey_9, bg = C.grey_4 },
-  BufferLineBackground = { fg = C.grey_9, bg = C.grey_4 },
-  BufferLineBufferVisible = { fg = C.fg, bg = C.bg },
-  BufferLineBufferSelected = { fg = C.fg, bg = C.bg, style = C.none },
-  BufferLineTab = { fg = C.fg, bg = C.bg },
-  BufferLineTabSelected = { fg = C.bg, bg = C.bg },
-  BufferLineTabClose = { fg = C.bg, bg = C.bg },
-  BufferLineIndicatorSelected = { fg = C.bg, bg = C.bg },
-  BufferLineSeparator = { fg = C.grey_4, bg = C.grey_4 },
-  BufferLineSeparatorVisible = { fg = C.bg, bg = C.bg },
-  BufferLineSeparatorSelected = { fg = C.grey_4, bg = C.grey_4 },
-  BufferLineCloseButton = { fg = C.grey_9, bg = C.grey_4 },
-  BufferLineCloseButtonVisible = { fg = C.grey_10, bg = C.bg },
-  BufferLineCloseButtonSelected = { fg = C.red_4, bg = C.bg },
-  BufferLineModified = { fg = C.red_4, bg = C.grey_4 },
-  BufferLineModifiedVisible = { fg = C.fg, bg = C.bg },
-  BufferLineModifiedSelected = { fg = C.green_2, bg = C.bg },
-  BufferLineError = { fg = C.red_1, bg = C.red_1 },
-  BufferLineErrorDiagnostic = { fg = C.red_1, bg = C.red_1 },
-
   -- Telescope
   TelescopeResultsTitle = { fg = C.green },
   TelescopePromptTitle = { fg = C.blue },
@@ -41,7 +20,7 @@ local others = {
   TelescopeTitle = { fg = C.fg },
   TelescopePromptCounter = { fg = C.grey_1 },
   TelescopePromptPrefix = { fg = C.blue },
-  TelescopePreviewLine = { bg = C.grey_5 },
+  TelescopePreviewLine = { fg = C.grey_5 },
   TelescopePreviewMatch = { fg = C.yellow },
   TelescopePreviewPipe = { fg = C.yellow },
   TelescopePreviewCharDev = { fg = C.yellow },
@@ -78,30 +57,6 @@ local others = {
   TelescopeResultsDiffDelete = { fg = C.none, bg = C.red },
   TelescopeResultsDiffUntracked = { fg = C.none, bg = C.grey_1 },
 
-  --Notify
-  NotifyERRORBorder = { fg = C.red },
-  NotifyWARNBorder = { fg = C.orange_1 },
-  NotifyINFOBorder = { fg = C.green },
-  NotifyDEBUGBorder = { fg = C.cyan },
-  NotifyTRACERBorder = { fg = C.purple },
-  NotifyERRORIcon = { fg = C.red },
-  NotifyWARNIcon = { fg = C.orange_1 },
-  NotifyINFOIcon = { fg = C.green },
-  NotifyDEBUGIcon = { fg = C.cyan },
-  NotifyTRACEIcon = { fg = C.purple },
-  NotifyERRORTitle = { fg = C.red },
-  NotifyWARNTitle = { fg = C.orange_1 },
-  NotifyINFOTitle = { fg = C.green },
-  NotifyDEBUGTitle = { fg = C.cyan },
-  NotifyTRACETitle = { fg = C.purple },
-  NotifyERRORBody = { fg = C.fg },
-  NotifyWARNBody = { fg = C.fg },
-  NotifyINFOBody = { fg = C.fg },
-  NotifyDEBUGBody = { fg = C.fg },
-  NotifyTRACEBody = { fg = C.fg },
-  NotifyLogTime = { fg = C.grey_2 },
-  NotifyLogTitle = { fg = C.blue },
-
   -- NvimTree
   NvimTreeFolderIcon = { fg = C.blue },
   NvimTreeExecFile = { fg = C.green },
@@ -120,21 +75,6 @@ local others = {
   NvimTreeGitStaged = { fg = C.green },
   NvimTreeGitDirty = { fg = C.red },
   NvimTreeGitNew = { fg = C.yellow },
-
-  -- Neo-Tree
-  NeoTreeDirectoryIcon = { fg = C.blue },
-  NeoTreeRootName = { fg = C.fg, style = "bold" },
-  NeoTreeFileName = { fg = C.fg },
-  NeoTreeFileIcon = { fg = C.fg },
-  NeoTreeFileNameOpened = { fg = C.green },
-  NeoTreeIndentMarker = { fg = C.blue_3 },
-  NeoTreeGitAdded = { fg = C.green },
-  NeoTreeGitConflict = { fg = C.red },
-  NeoTreeGitModified = { fg = C.orange },
-  NeoTreeGitUntracked = { fg = C.yellow },
-  NeoTreeNormal = { bg = C.blue_2 },
-  NeoTreeNormalNC = { bg = C.blue_2 },
-  NeoTreeSymbolicLinkTarget = { fg = C.cyan },
 
   -- VimWiki
   VimwikiLink = { fg = C.cyan, bg = C.none },
@@ -172,23 +112,9 @@ local others = {
 
   -- Hop
   HopNextKey = { fg = C.red, style = "bold" },
-  HopNextKey1 = { fg = C.cyan, style = "bold" },
+  HopNextKey1 = { fg = C.cyan, fmt = "bold" },
   HopNextKey2 = { fg = C.blue },
   HopUnmatched = { fg = C.grey },
-
-  -- Lightspeed
-  LightspeedLabel = { fg = C.red_3, style = "underline" },
-  LightspeedLabelOverlapped = { fg = C.blue, style = "underline" },
-  LightspeedLabelDistant = { fg = C.red_1, style = "underline" },
-  LightspeedLabelDistantOverlapped = { fg = C.blue_1, style = "underline" },
-  LightspeedShortcut = { fg = C.black, bg = C.red_3, style = "bold,underline" },
-  LightspeedShortcutOverlapped = { fg = C.black, bg = C.blue, style = "bold,underline" },
-  LightspeedMaskedChar = { fg = C.green_1 },
-  LightspeedGreyWash = { fg = C.grey_2, bg = C.none },
-  LightspeedUnlabeledMatch = { fg = C.white, style = "bold" },
-  LightspeedOneCharMatch = { fg = C.green, bg = C.red_3, style = "bold" },
-  LightspeedUniqueChar = { fg = C.white, style = "bold" },
-  LightspeedPendingOpArea = { fg = C.yellow },
 
   -- WhichKey
   WhichKeyFloat = { fg = C.fg },
@@ -197,9 +123,6 @@ local others = {
 
   -- SymbolsOutline
   FocusedSymbol = { fg = C.yellow, bg = C.none },
-
-  -- Beacon
-  Beacon = { bg = C.blue },
 }
 
 return others

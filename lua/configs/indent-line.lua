@@ -25,7 +25,6 @@ function M.config()
     "packer",
     "neogitstatus",
     "NvimTree",
-    "neo-tree",
     "Trouble",
   }
   vim.g.indent_blankline_context_patterns = {
@@ -51,10 +50,10 @@ function M.config()
     "operation_type",
   }
 
-  indent_blankline.setup(require("core.utils").user_plugin_opts("plugins.indent_blankline", {
+  indent_blankline.setup {
     show_current_context = true,
     show_current_context_start = false,
-  }))
+  }
 end
 
 return M

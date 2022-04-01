@@ -1,15 +1,13 @@
 local M = {}
 
-local user_plugin_opts = require("core.utils").user_plugin_opts
-
 function M.config()
   local present, colorizer = pcall(require, "colorizer")
   if not present then
     return
   end
 
-  local colorizer_opts = user_plugin_opts("plugins.colorizer", {
-    { "*" },
+  colorizer.setup(
+    { "*" }, -- Highlight all files, but customize some others
     {
       RGB = true, -- #RGB hex codes
       RRGGBB = true, -- #RRGGBB hex codes
@@ -20,9 +18,8 @@ function M.config()
       css = false, -- Enable all css features: rgb_fn, hsl_fn, names, RGB, RRGGBB
       css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
       mode = "background", -- Set the display mode
-    },
-  })
-  colorizer.setup(colorizer_opts[1], colorizer_opts[2])
+    }
+  )
 end
 
 return M

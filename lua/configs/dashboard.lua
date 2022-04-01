@@ -4,7 +4,7 @@ function M.config()
   local g = vim.g
   local fn = vim.fn
 
-  local plugins_count = fn.len(vim.fn.globpath(fn.stdpath "data" .. "/site/pack/packer/start", "*", 0, 1))
+  local plugins_count = fn.len(fn.globpath("~/.local/share/nvim/site/pack/packer/start", "*", 0, 1))
 
   g.dashboard_disable_statusline = 1
   g.dashboard_default_executive = "telescope"
