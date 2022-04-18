@@ -5,12 +5,13 @@ local set = vim.opt
 local config = {
 
   -- Set colorscheme
-  colorscheme = "moonlight",
+  colorscheme = "catppuccin",
 
   -- Add plugins
   plugins = {
     "mfussenegger/nvim-jdtls",
     "shaunsingh/moonlight.nvim",
+  { "catppuccin/nvim", as = "catppuccin" },
   { "andweeb/presence.nvim" },
   {
       "ray-x/lsp_signature.nvim",
